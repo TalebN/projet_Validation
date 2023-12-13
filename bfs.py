@@ -19,21 +19,25 @@ def add_all(graph, edges):
         graph.add_new_one(*edge)
 
 def bfs_search(graph, query):
-    visited = set()
-    queue = deque([graph.root()])
-    visited.add(graph.root())
+    known = set()
+    frontier = deque([graph.root()])
+    i = True
 
-    while queue:
-        current_node = queue.popleft()
+    while frontier or i:
+        if i:
+            neighbors = graph.neighbors(graph.root())
+            i = False
+        else:
+            neighbors = graph.neighbors(frontier.popleft())
+        for n in neighbors:
+            if n not in known:
+                known.add(n)
+                frontier.append(n)
 
-        if query(current_node):
-            return visited
-        for neighbor in graph.neighbors(current_node):
-            if neighbor not in visited:
-                queue.append(neighbor)
-                visited.add(neighbor)
+    return known,None
 
-    return visited
+
+
 
 #exemple dutilisation
 # g = Graph(root=0)
