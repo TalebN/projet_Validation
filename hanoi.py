@@ -54,7 +54,8 @@ class HanoiRG:
         if not result_states:
             print("Aucun état exploré.")
         else:
-            for i, state in enumerate(result_states):
+            visited_states, final_state = result_states
+            for i, state in enumerate(visited_states):
                 print(f"\nÉtat {i + 1}:")
                 self.print_hanoi_state(state)
                 print("-" * 20)
