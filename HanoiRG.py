@@ -48,7 +48,7 @@ def main():
 
    graph = HanoiRG()  # Créer un graphe de tours de Hanoi
    parentracer = ParentTraceur(graph)  # Créer un traceur de parents
-   result, visited_nodes = bfs_search(parentracer, isFinal, inTrace=True)
+   result, visited_nodes = bfs_search(parentracer, isFinal)
    print("\nNodes visited:")
    for node in visited_nodes:
     print(node.towers)
