@@ -59,6 +59,6 @@ def main():
     print("Result not found.")
 
 
-# Fonction principale qui affiche la trace
+# Fonction principale qui affiche la trace.
 if __name__ == "__main__":
     main()

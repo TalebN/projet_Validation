@@ -4,7 +4,7 @@ from RootedGraph import RootedGraph
 
 class DictRootedGraph(RootedGraph):
     def __init__(self):
-        super().__init__()  # Appeler le constructeur de la classe de base en utilisant super
+        super().__init__()  # Appeler le constructeur de la classe de base en utilisant super.
 
     def getRoots(self):
         return super().getRoots()  # Appeler la même méthode roots de la classe de base et renvoyer le résultat

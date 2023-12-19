@@ -2,7 +2,7 @@ from RootedGraph import RootedGraph
 
 class ParentTraceur(RootedGraph):
     def __init__(self, rg):
-        self.rg = rg  # Opérande représentant le graphe raciné
+        self.rg = rg  # Opérande représentant le graphe raciné.
         self.parents = {}  # Dictionnaire pour stocker les parents de chaque nœud
 
     def getRoots(self):

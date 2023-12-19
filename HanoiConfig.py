@@ -1,7 +1,7 @@
 
 import copy
 
-class HanoiConfig:
+class HanoiConfig:    #HanoiConfiguration
 
     def __init__(self ,n):
          tower1 = list(range(n, 0, -1))
