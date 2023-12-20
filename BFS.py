@@ -1,7 +1,7 @@
 from collections import deque
 #
 
-def bfs_search(graph, query,inTrace=False):
+def bfs_search(graph, query):
     visited = set()
     queue = deque()
     i = True
