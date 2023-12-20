@@ -6,7 +6,9 @@ class Semantics2RG(RootedGraph):
         self.sem=sem
 
     def getRoots(self):
-        return self.sem.roots
+        roots = self.sem.initial()
+        return roots
+
     def getNeighbors(self, n):
         actions=self.sem.actions(n)
         neighbors=[]
