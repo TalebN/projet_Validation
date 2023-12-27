@@ -1,5 +1,4 @@
 from collections import deque
-#
 
 def bfs_search(graph, query):
     visited = set()
@@ -20,5 +19,4 @@ def bfs_search(graph, query):
                 visited.add(neighbour)
                 queue.append(neighbour)
     return None, visited
-
 

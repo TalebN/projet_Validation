@@ -1,8 +1,9 @@
 from RootedGraph import RootedGraph
 
+
 class ParentTraceur(RootedGraph):
     def __init__(self, rg):
-        self.rg = rg  # Opérande représentant le graphe raciné.
+        self.rg = rg  # Operand representation le graphe racine.
         self.parents = {}  # Dictionnaire pour stocker les parents de chaque nœud
 
     def getRoots(self):
@@ -28,10 +29,17 @@ class ParentTraceur(RootedGraph):
             neighbor_index += 1
         return neighbors
 
-    def printParents(self, last):
-        current_node = last
+    def get_trace(self, last):
+            print("Trace:\n")
+            lap = last
+            value = self.parents[last]
+            while value is not None and len(value) !=0:
+                if isinstance(lap, str):
+                    print(f"{lap}: {value[0]}")
+                else:
+                    print(f"{lap.towers}: {value[0].towers}")
 
-        # Afficher les parents de chaque nœud jusqu'à la racine
-        while current_node is not None and len(self.parents[current_node]) != 0:
-            print(f"{current_node.towers}: {self.parents[current_node][0].towers}")
-            current_node = self.parents[current_node][0]
+                lap = value[0]
+                value = self.parents[lap]
+
+
