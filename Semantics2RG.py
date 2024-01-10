@@ -10,9 +10,9 @@ class Semantics2RG(RootedGraph):
         return roots
 
     def getNeighbors(self, n):
-        actions=self.sem.actions(n)
-        neighbors=[]
+        actions = self.sem.actions(n)
+        neighbors = []
         for act in actions:
-            targets=self.sem.execute(act,n)
+            targets = self.sem.execute(act, n)
             neighbors.extend(targets)
-            return neighbors
+        return neighbors

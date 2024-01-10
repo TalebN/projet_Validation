@@ -1,5 +1,6 @@
 from collections import deque
 
+
 def bfs_search(graph, query):
     visited = set()
     queue = deque()

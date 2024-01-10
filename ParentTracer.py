@@ -11,10 +11,8 @@ class ParentTraceur(RootedGraph):
 
         # Initialiser les entrées du dictionnaire 'parents' pour chaque racine
         root_index = 0
-        while root_index < len(roots):
-            root_node = roots[root_index]
-            self.parents[root_node] = []
-            root_index += 1
+        for r in roots:
+            self.parents[r] = []
         return roots
 
     def getNeighbors(self, node):
@@ -29,17 +27,14 @@ class ParentTraceur(RootedGraph):
             neighbor_index += 1
         return neighbors
 
-    def get_trace(self, last):
-            print("Trace:\n")
-            lap = last
-            value = self.parents[last]
-            while value is not None and len(value) !=0:
-                if isinstance(lap, str):
-                    print(f"{lap}: {value[0]}")
-                else:
-                    print(f"{lap.towers}: {value[0].towers}")
-
-                lap = value[0]
-                value = self.parents[lap]
-
-
+    def get_trace(self, node):
+        trace = []
+        current = node
+        while current is not None:
+            trace.append(current)
+            parents = self.parents.get(current)
+            if len(parents) > 0:
+                current = parents[0]
+            else:
+                current = None
+        return trace[::-1]

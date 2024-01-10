@@ -14,16 +14,38 @@ class AliceetBob(SemanticRelation):
 
     def actions(self, conf):
         actions = []
-        if conf == "Home_Alice":
-            actions.append(lambda x: ["Wait_Alice"])
-        elif conf == "Wait_Alice":
-            actions.append(lambda x: ["SC_Alice"])
-        elif conf == "Home_Bob":
-            actions.append(lambda x: ["Wait_Bob"])
-        elif conf == "Wait_Bob":
-            actions.append(lambda x: ["SC_Bob"])
 
+        confAlice, confBob = conf
+
+        if confAlice == "Home_Alice":
+            actions.append(lambda x: [("Wait_Alice", confBob)])
+        if confAlice == "Wait_Alice":
+            actions.append(lambda x: [("SC_Alice", confBob)])
+        if confAlice == "SC_Alice":
+            actions.append(lambda x: [("Home_Alice", confBob)])
+        if confBob == "Home_Bob":
+            actions.append(lambda x: [(confAlice, "Wait_Bob")])
+        if confBob == "Wait_Bob":
+            actions.append(lambda x: [(confAlice, "SC_Bob")])
+        if confBob == "SC_Bob":
+            actions.append(lambda x: [(confAlice, "Home_Bob")])
         return actions
 
     def execute(self, action, conf):
         return action(conf)
+
+
+if __name__ == "__main__":
+    AliceBob = AliceetBob()
+    semantics2RG = Semantics2RG(AliceBob)
+    # print("-------------------------------")
+    # print(semantics2RG.getRoots())
+    # print("-------------------------------")
+    # print(semantics2RG.getNeighbors("Home_Alice"))
+    pr = ParentTraceur(semantics2RG)
+    t, k = bfs_search(pr, lambda x: x[0] == "SC_Alice" and x[1] == "SC_Bob")
+
+    print(t, k)
+    trace = pr.get_trace(t)
+    print(trace)
+    print("//////////////////////////////////////////////////////////////////////////////////////////////////")
