@@ -10,7 +10,7 @@ class AliceetBobV1(SemanticRelation):
         self.flage_Bob = 0
 
     def initial(self):
-        return ["Home_Alice", "Home_Bob"]
+        return [("Home_Alice", "Home_Bob")]
 
     def actions(self, conf):
         actions = []

@@ -10,7 +10,7 @@ class AliceetBob(SemanticRelation):
         super().__init__()
 
     def initial(self):
-        return ["Home_Alice", "Home_Bob"]
+        return [("Home_Alice", "Home_Bob")]
 
     def actions(self, conf):
         actions = []
