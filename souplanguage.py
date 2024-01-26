@@ -1,7 +1,6 @@
 from abc import ABC
 import copy
 
-
 from Semantics import SemanticRelation
 
 
@@ -25,6 +24,7 @@ class Piece:  # (SoupConfiguration)
     def enabled(self, c):
         return self.garde(c)
 
+
 class SoupSpecification:
 
     def __init__(self, initials, pieces):
@@ -40,6 +40,7 @@ class SoupSpecification:
     def enabledPieces(self, c):
         filtered_pieces = list(filter(lambda p: p.enabled(c), self.pieces_list))
         return filtered_pieces
+
 
 class SoupSemantics(SemanticRelation):
     def __init__(self, spec):
