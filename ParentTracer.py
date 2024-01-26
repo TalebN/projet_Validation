@@ -38,3 +38,12 @@ class ParentTraceur(RootedGraph):
             else:
                 current = None
         return trace[::-1]
+
+    def printParentsABSoup(self, last):  # get_trace
+        print("Trace:\n")
+        lap = last
+        value = self.parents[last]
+        while value is not None and len(value)  != 0:
+            print(f"{lap}: {value[0]}")
+            lap = value[0]
+            value = self.parents[lap]
