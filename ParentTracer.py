@@ -1,13 +1,15 @@
+
+
 from RootedGraph import RootedGraph
 
 
 class ParentTraceur(RootedGraph):
-    def __init__(self, rg):
-        self.rg = rg  # Operand representation le graphe racine.
+    def __init__(self, rgraph):
+        self.rgraph = rgraph  # Operand representation le graphe racine.
         self.parents = {}  # Dictionnaire pour stocker les parents de chaque nœud
 
     def getRoots(self):
-        roots = self.rg.getRoots()  # Obtenir les racines du graphe
+        roots = self.rgraph.getRoots()  # Obtenir les racines du graphe
 
         # Initialiser les entrées du dictionnaire 'parents' pour chaque racine
         root_index = 0
@@ -16,7 +18,7 @@ class ParentTraceur(RootedGraph):
         return roots
 
     def getNeighbors(self, node):
-        neighbors = self.rg.getNeighbors(node)  # Obtenir les voisins d'un nœud
+        neighbors = self.rgraph.getNeighbors(node)  # Obtenir les voisins d'un nœud
 
         # Mettre à jour les parents des voisins dans le dictionnaire 'parents'
         neighbor_index = 0
@@ -47,3 +49,4 @@ class ParentTraceur(RootedGraph):
             print(f"{lap}: {value[0]}")
             lap = value[0]
             value = self.parents[lap]
+

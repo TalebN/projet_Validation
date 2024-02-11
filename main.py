@@ -1,5 +1,5 @@
 # ----------------------------Import class--------------------------------------------------
-from AliceetBob0 import AliceetBob
+from AliceEtBob0 import AliceetBob
 from BFS import bfs_search
 from DictRootedGraph import DictRootedGraph
 from HanoiConfig import isFinal

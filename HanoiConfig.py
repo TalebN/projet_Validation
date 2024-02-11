@@ -1,6 +1,6 @@
 import copy
 
-
+#Classe destinée à décrire la configuration des Tours de Hanoï.
 class HanoiConfig:
 
     def __init__(self, n):

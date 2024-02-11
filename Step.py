@@ -25,6 +25,7 @@ class StepSyncComposition(SemanticRelation):
             lhs_targets = self.lhs.execute(lhs_action, lhs_source)
             if len(lhs_targets) == 0:
                 lhs_action_count -= 1
+
         for lhs_target in lhs_targets:
             lhs_step = (lhs_source, lhs_action, lhs_target)
             rhs_actions = self.rhs.actions(lhs_step, rhs_source)

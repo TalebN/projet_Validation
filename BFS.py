@@ -1,6 +1,6 @@
 from collections import deque
 
-
+#implémentation de la recherche en largeur (BFS) dans un graphe.
 def bfs_search(graph, query):
     visited = set()
     queue = deque()
