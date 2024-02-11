@@ -29,17 +29,3 @@ class HanoiRG(RootedGraph):
                     neighbors.append(new_config)
 
         return neighbors
-
-if __name__ == '__main__':
-    print("############################################### Test du HanoiRG  ##################################")
-    graph = HanoiRG()  # Créer un graphe de tours de Hanoi
-    result, visited_nodes = bfs_search(graph, isFinal)
-    print("\nNodes visited:")
-    for node in visited_nodes:
-        print(node.towers)
-
-    if result is not None:
-        print("Result found:", result.towers)
-    else:
-        print("Result not found.")
-    print("//////////////////////////////////////////////////////////////////////////////////////////////////")

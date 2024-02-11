@@ -40,10 +40,4 @@ class AliceetBobV1(SemanticRelation):
         return action(conf)
 
 
-if __name__ == '__main__':
-    coordinator = AliceetBobV1()
-    rg = Semantics2RG(coordinator)
-    traceur = ParentTraceur(rg)
-    w, k = bfs_search(traceur, lambda x: x[0] == "SC_Alice" and x[1] == "SC_Bob")
-    trace = traceur.get_trace(w)
-    print(trace)
+

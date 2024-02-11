@@ -35,17 +35,3 @@ class AliceetBob(SemanticRelation):
         return action(conf)
 
 
-if __name__ == "__main__":
-    AliceBob = AliceetBob()
-    semantics2RG = Semantics2RG(AliceBob)
-    # print("-------------------------------")
-    # print(semantics2RG.getRoots())
-    # print("-------------------------------")
-    # print(semantics2RG.getNeighbors("Home_Alice"))
-    pr = ParentTraceur(semantics2RG)
-    t, k = bfs_search(pr, lambda x: x[0] == "SC_Alice" and x[1] == "SC_Bob")
-
-    print(t, k)
-    trace = pr.get_trace(t)
-    print(trace)
-    print("//////////////////////////////////////////////////////////////////////////////////////////////////")

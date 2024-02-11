@@ -41,32 +41,3 @@ def p1a_a(x, op):
         return x
 
 
-if __name__ == '__main__':
-    p1a = Piece("Alice souhaite", lambda x: x.EtatALICE == 0, lambda x: p1a_a(x, 0))
-    p2a = Piece("Alice entre", lambda x: x.flagBob == 0, lambda x: p1a_a(x, 0))
-    p3a = Piece("Alice sort", lambda x: x.EtatALICE == 2, lambda x: p1a_a(x, 0))
-    p1b = Piece("Bob souhaite", lambda x: x.EtatBOB == 0, lambda x: p1a_a(x, 1))
-    p2b = Piece("Bob entre", lambda x: x.flagAlice == 0, lambda x: p1a_a(x, 1))
-    p3b = Piece("Bob sort", lambda x: x.EtatBOB == 2, lambda x: p1a_a(x, 1))
-    Lp = [p1a, p2a, p3a, p1b, p2b, p3b]
-    # random.shuffle(Lp)
-
-    initials = [AliceBobConfV1()]
-    soup = SoupSpecification(initials, Lp)
-    soupSem = SoupSemantics(soup)
-    s = Semantics2RG(soupSem)
-    pr = ParentTraceur(s)
-    R = bfs_search(pr, lambda n: not (s.getNeighbors(n)))
-
-    print("------------")
-    print("---- chemin BFS----")
-    print()
-
-    for e in R[1]:
-        print(e)
-
-    print("------------")
-    print("---- Trace ----")
-    print()
-
-    pr.printParentsABSoup(R[0])

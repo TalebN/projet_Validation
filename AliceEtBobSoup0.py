@@ -39,34 +39,4 @@ def p1a_a(x, op):
     return x
 
 
-if __name__ == '__main__':
 
-    Lp = [
-        Piece("Alice souahite", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Bob souahite", lambda x: True, lambda x: p1a_a(x, 1)),
-        Piece("Alice entre", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Bob entre", lambda x: True, lambda x: p1a_a(x, 1)),
-        Piece("Alice sort", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Bob sort", lambda x: True, lambda x: p1a_a(x, 1)),
-    ]
-
-    initials = [AliceBobConfVersion0()]
-
-    soup = SoupSpecification(initials, Lp)
-
-    soupSem = SoupSemantics(soup)
-    s = Semantics2RG(soupSem)
-    pr = ParentTraceur(s)
-    R = bfs_search(pr, lambda n: n.EtatBOB == 2)
-
-    print("------------")
-    print("---- chemin BFS----")
-    print()
-
-    for e in R[1]:
-        print(e)
-
-    print("------------")
-    print("---- Trace ----")
-    print()
-    pr.printParentsABSoup(R[0])
