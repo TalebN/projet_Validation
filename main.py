@@ -107,19 +107,19 @@ print("/////////////////////////////////////////////////////////////////////////
 
 
 
-print("############################################### Test du AliceETBobSoup0 Version 1 ##################################")
-Lp = [
+print("############################################### Test du AliceETBobSoup0  ##################################")
+pieces = [
         Piece("Alice souahite", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Bob souahite", lambda x: True, lambda x: p1a_a(x, 1)),
         Piece("Alice entre", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Bob entre", lambda x: True, lambda x: p1a_a(x, 1)),
         Piece("Alice sort", lambda x: True, lambda x: p1a_a(x, 0)),
+        Piece("Bob souahite", lambda x: True, lambda x: p1a_a(x, 1)),
+        Piece("Bob entre", lambda x: True, lambda x: p1a_a(x, 1)),
         Piece("Bob sort", lambda x: True, lambda x: p1a_a(x, 1)),
     ]
-
+random.shuffle(pieces)
 initials = [AliceBobConfVersion0()]
 
-soup = SoupSpecification(initials, Lp)
+soup = SoupSpecification(initials, pieces)
 
 soupSem = SoupSemantics(soup)
 s = Semantics2RG(soupSem)

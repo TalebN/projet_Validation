@@ -7,12 +7,12 @@ import random
 
 class AliceBobConfVersion0(SoupConfiguration):
     def __init__(self):
-        super().__init__()
+
         self.EtatALICE = 0
         self.EtatBOB = 0
 
     def __hash__(self):
-        return hash((self.EtatALICE, self.EtatBOB))
+        return hash((self.EtatALICE + self.EtatBOB))
 
     def __eq__(self, other):
         return self.EtatALICE == other.EtatALICE and self.EtatBOB == other.EtatBOB
@@ -34,9 +34,10 @@ class Piece:
 def p1a_a(x, op):
     if op == 0:
         x.EtatALICE = (x.EtatALICE + 1) % 3
+        return x
     else:
         x.EtatBOB = (x.EtatBOB + 1) % 3
-    return x
+        return x
 
 
 
