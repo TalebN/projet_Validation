@@ -1,4 +1,4 @@
-import copy
+
 
 from BFS import bfs_search
 from souplanguage import SoupConfiguration

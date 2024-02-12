@@ -3,17 +3,20 @@ import random
 
 from AliceEtBob0 import AliceetBob
 from AliceEtBobPeterson import State, action
-from AliceEtBobSoup0 import AliceBobConfVersion0
-from AliceEtBobSoup1 import p1a_a, AliceBobConfV1
+from AliceEtBobSoup0 import AliceBobConfVersion0, funct
+from AliceEtBobSoup1 import  AliceBobConfV1, funct1
 from AliceEtBobV1 import AliceetBobV1
 from AliceEtBobV2 import process_alicePriori__bob, reset_flag
+from AliceEtBob_WITH_lhs import func2, buchi_action, PropBucchi
 from BFS import bfs_search
+from DetectionCycle import restate, ConfSpeci, detect_cycle
 from DictRootedGraph import DictRootedGraph
 from HanoiConfig import isFinal
 from HanoiRG import HanoiRG
 from OneBitClock import OneBitClock
 from ParentTracer import ParentTraceur
 from Semantics2RG import Semantics2RG
+from Step import DependantSoupSemantics, StepSyncComposition
 from souplanguage import Piece, SoupSpecification, SoupSemantics
 
 # -----------------------------Test Du Class DictRootedGraaph-----------------------------
@@ -109,12 +112,12 @@ print("/////////////////////////////////////////////////////////////////////////
 
 print("############################################### Test du AliceETBobSoup0  ##################################")
 pieces = [
-        Piece("Alice souahite", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Alice entre", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Alice sort", lambda x: True, lambda x: p1a_a(x, 0)),
-        Piece("Bob souahite", lambda x: True, lambda x: p1a_a(x, 1)),
-        Piece("Bob entre", lambda x: True, lambda x: p1a_a(x, 1)),
-        Piece("Bob sort", lambda x: True, lambda x: p1a_a(x, 1)),
+        Piece("Alice souahite", lambda x: True, lambda x: funct(x, 0)),
+        Piece("Alice entre", lambda x: True, lambda x: funct(x, 0)),
+        Piece("Alice sort", lambda x: True, lambda x: funct(x, 0)),
+        Piece("Bob souahite", lambda x: True, lambda x: funct(x, 1)),
+        Piece("Bob entre", lambda x: True, lambda x: funct(x, 1)),
+        Piece("Bob sort", lambda x: True, lambda x: funct(x, 1)),
     ]
 random.shuffle(pieces)
 initials = [AliceBobConfVersion0()]
@@ -142,12 +145,12 @@ print("/////////////////////////////////////////////////////////////////////////
 
 
 print("############################################### Test du AliceETBobSoup1 ##################################")
-p1a = Piece("Alice souhaite", lambda x: x.EtatALICE == 0, lambda x: p1a_a(x, 0))
-p2a = Piece("Alice entre", lambda x: x.flagBob == 0, lambda x: p1a_a(x, 0))
-p3a = Piece("Alice sort", lambda x: x.EtatALICE == 2, lambda x: p1a_a(x, 0))
-p1b = Piece("Bob souhaite", lambda x: x.EtatBOB == 0, lambda x: p1a_a(x, 1))
-p2b = Piece("Bob entre", lambda x: x.flagAlice == 0, lambda x: p1a_a(x, 1))
-p3b = Piece("Bob sort", lambda x: x.EtatBOB == 2, lambda x: p1a_a(x, 1))
+p1a = Piece("Alice souhaite", lambda x: x.EtatALICE == 0, lambda x: funct1(x, 0))
+p2a = Piece("Alice entre", lambda x: x.flagBob == 0, lambda x: funct1(x, 0))
+p3a = Piece("Alice sort", lambda x: x.EtatALICE == 2, lambda x: funct1(x, 0))
+p1b = Piece("Bob souhaite", lambda x: x.EtatBOB == 0, lambda x: funct1(x, 1))
+p2b = Piece("Bob entre", lambda x: x.flagAlice == 0, lambda x: funct1(x, 1))
+p3b = Piece("Bob sort", lambda x: x.EtatBOB == 2, lambda x: funct1(x, 1))
 Lp = [p1a, p2a, p3a, p1b, p2b, p3b]
 # random.shuffle(Lp)
 initials = [AliceBobConfV1()]
@@ -223,4 +226,67 @@ print()
 
 for element in result[1]:
     print(element)
+print("//////////////////////////////////////////////////////////////////////////////////////////////////")
+
+
+
+print("############################################### Test du Detection #################################")
+pieces = [
+    Piece("mvt", lambda x: x.state == 0, lambda x: restate(x, 1)),
+    Piece("mvt", lambda x: x.state == 1, lambda x: restate(x, 2)),
+    Piece("mvt", lambda x: x.state == 2, lambda x: restate(x, 0)),
+    Piece("mvt", lambda x: x.state == 2, lambda x: restate(x, 2))
+]
+
+initials = ConfSpeci()
+soup_spec = SoupSpecification([initials], pieces)
+soup_semantics = SoupSemantics(soup_spec)
+semantic_rg = Semantics2RG(soup_semantics)
+parent_traceur = ParentTraceur(semantic_rg)
+
+resultat = bfs_search(parent_traceur, lambda n: n in parent_traceur.getNeighbors(n))
+
+print(resultat[0])
+
+# Pour détecter un cycle :
+detect_cycle(parent_traceur)
+
+resultat_cycle = bfs_search(parent_traceur, lambda n: n in bfs_search(parent_traceur, lambda n: n)[1])
+
+
+
+print("//////////////////////////////////////////////////////////////////////////////////////////////////")
+
+
+
+print("############################################### Test du AliceETBobPeterson avec LHS ##################################")
+pieces = [
+    Piece("Alice souhait", lambda x: x.state_Alice == 0, lambda x: func2(x, 0)),
+    Piece("Alice entre", lambda x: x.flag_Bob == 0 or x.turn == 0, lambda x: func2(x, 0)),
+    Piece("Alice sort", lambda x: x.state_Alice == 2, lambda x: func2(x, 0)),
+    Piece("Bob souhait", lambda x: x.state_Bob == 0, lambda x: func2(x, 1)),
+    Piece("Bob entre", lambda x: x.flag_Alice == 0 or x.turn == 1, lambda x: func2(x, 1)),
+    Piece("Bob sort", lambda x: x.state_Bob == 2, lambda x: func2(x, 1))
+]
+
+random.shuffle(pieces)
+
+initials1 = [State()]
+
+pieces1 = [
+    Piece("bucchi piece", lambda y, x: not(y[2].state_Alice == 2 or y[2].state_Bob == 2), lambda y, x: buchi_action(x)),
+    Piece("bucchi piece", lambda y, x: not(y[2].state_Alice == 2 or y[2].state_Bob == 2), lambda y, x: x),
+    Piece("bucchi piece", lambda y, x: (y[2].state_Alice == 2 or y[2].state_Bob == 2), lambda y, x: x)
+]
+
+initials2 = [PropBucchi()]
+
+lhsspe = SoupSpecification(initials1, pieces)
+lhs = SoupSemantics(lhsspe)
+rhs_soup = SoupSpecification(initials2, pieces1)
+rhs = DependantSoupSemantics(rhs_soup)
+dss = StepSyncComposition(lhs, rhs)
+s = Semantics2RG(dss)
+pr = ParentTraceur(s)
+R = bfs_search(pr, lambda n: n[1].state == 1)
 print("//////////////////////////////////////////////////////////////////////////////////////////////////")

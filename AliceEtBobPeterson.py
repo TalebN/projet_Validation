@@ -1,8 +1,3 @@
-import random
-from BFS import bfs_search
-from ParentTracer import ParentTraceur
-from Semantics2RG import Semantics2RG
-from souplanguage import SoupConfiguration, Piece, SoupSpecification, SoupSemantics
 
 class State:
     def __init__(self, Alice_state=0, Bob_state=0, Alice_flag=0, Bob_flag=0, turn=-1):
@@ -30,7 +25,7 @@ def action(state, player):
         if state.Alice_state == 0:
             state.Alice_flag = 0
         return state
-    else:  # Bob's turn
+    else:
         if state.Bob_state == 0:
             state.Bob_flag = 1
             state.turn = 0

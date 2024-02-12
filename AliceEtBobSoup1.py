@@ -1,9 +1,5 @@
-import random
 
-from BFS import bfs_search
-from ParentTracer import ParentTraceur
-from Semantics2RG import Semantics2RG
-from souplanguage import SoupConfiguration, Piece, SoupSemantics, SoupSpecification
+from souplanguage import SoupConfiguration
 
 
 class AliceBobConfV1(SoupConfiguration):
@@ -24,7 +20,7 @@ class AliceBobConfV1(SoupConfiguration):
             self.EtatBOB) + " flag Bob: " + str(self.flagBob)
 
 
-def p1a_a(x, op):
+def funct1(x, op):
     if op == 0:  # for alice
         if x.EtatALICE == 0:
             x.flagAlice = 1

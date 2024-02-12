@@ -1,7 +1,5 @@
-from BFS import bfs_search
-from ParentTracer import ParentTraceur
-from Semantics2RG import Semantics2RG
-from souplanguage import SoupConfiguration, SoupSemantics, SoupSpecification
+
+from souplanguage import SoupConfiguration
 import random
 
 
@@ -31,7 +29,7 @@ class Piece:
         return self.condition(c)
 
 
-def p1a_a(x, op):
+def funct(x, op):
     if op == 0:
         x.EtatALICE = (x.EtatALICE + 1) % 3
         return x

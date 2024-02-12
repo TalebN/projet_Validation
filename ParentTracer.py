@@ -41,7 +41,7 @@ class ParentTraceur(RootedGraph):
                 current = None
         return trace[::-1]
 
-    def printParentsABSoup(self, last):  # get_trace
+    def printParentsABSoup(self, last):
         print("Trace:\n")
         lap = last
         value = self.parents[last]

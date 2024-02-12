@@ -1,7 +1,6 @@
 from BFS import bfs_search
-from ParentTracer import ParentTraceur
+
 from Semantics import SemanticRelation
-from Semantics2RG import Semantics2RG
 
 
 class AliceetBobV1(SemanticRelation):
@@ -38,6 +37,3 @@ class AliceetBobV1(SemanticRelation):
 
     def execute(self, action, conf):
         return action(conf)
-
-
-
